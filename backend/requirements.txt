@@ -23,7 +23,7 @@ Flask==3.0.3
 googletrans==4.0.0rc1
 psycopg2-binary==2.9.9
 python-dotenv==1.0.0
-flask-cors==4.0.0
+flask-cors==6.0.0
 flatbuffers==1.12
 fonttools==4.56.0
 fpdf2==2.8.2
