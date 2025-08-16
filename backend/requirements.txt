@@ -33,7 +33,7 @@ git-filter-repo==2.47.0
 google-auth==1.27.1
 google-auth-oauthlib==0.4.3
 google-pasta==0.2.0
-grpcio==1.32.0
+grpcio==1.53.2
 h5py==2.10.0
 idna==3.7
 importlib-metadata==3.7.2
