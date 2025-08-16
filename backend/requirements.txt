@@ -48,7 +48,7 @@ mypy-extensions==1.0.0
 mysql-connector-python==9.1.0
 numpy==1.19.5
 oauthlib==3.1.0
-opencv-python==4.5.1.48
+opencv-python==4.8.1.78
 opt-einsum==3.3.0
 packaging==24.2
 pathspec==0.12.1
