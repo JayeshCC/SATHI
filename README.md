@@ -1,49 +1,255 @@
-# CRPF Mental Health Monitoring System - Technical Documentation
+# SATHI - CRPF Mental Health Monitoring System
 
-## Table of Contents
+## 🎯 Project Overview
 
-1. [Project Overview](#project-overview)
-2. [System Architecture](#system-architecture)
-3. [Modules & Data Flow](#modules--data-flow)
-4. [AI/ML Models & Algorithms](#aiml-models--algorithms)
-5. [Depression Detection Algorithm](#depression-detection-algorithm)
-6. [Database Design](#database-design)
-7. [Security Features](#security-features)
-8. [Installation & Deployment](#installation--deployment)
-9. [Configuration Management](#configuration-management)
-10. [Monitoring & Maintenance](#monitoring--maintenance)
-11. [API Documentation](#api-documentation)
-12. [Performance Optimization](#performance-optimization)
-13. [Troubleshooting Guide](#troubleshooting-guide)
-14. [Future Enhancements](#future-enhancements)
-15. [Technical Support](#technical-support)
+**SATHI** (System for Analyzing and Tracking Human Intelligence) is an advanced AI-powered mental health monitoring system specifically designed for the Central Reserve Police Force (CRPF). The system combines cutting-edge machine learning, natural language processing, and computer vision technologies to provide comprehensive mental health assessment and early intervention capabilities.
 
----
+### 🚀 Key Features
 
-## Project Overview
+- **🧠 AI-Powered Mental Health Assessment**: Advanced NLP and emotion detection algorithms
+- **👁️ Real-time Face Recognition**: Enhanced facial recognition with emotion analysis
+- **📊 Comprehensive Dashboard**: Administrative panel with detailed analytics and reporting
+- **🔍 Dynamic Survey System**: Customizable questionnaires with multilingual support (English/Hindi)
+- **⚡ Real-time Monitoring**: Live emotion detection during surveys and CCTV monitoring
+- **📱 Mobile-Responsive Design**: Optimized for desktop and mobile devices
+- **🔒 Secure Architecture**: Role-based access control and data encryption
+- **📈 Risk Assessment**: Automated categorization into risk levels (LOW, MEDIUM, HIGH, CRITICAL)
 
-### Aim and Objective
-
-The **CRPF Mental Health Monitoring System** is an advanced, AI-powered platform designed to continuously monitor and assess the mental health status of Central Reserve Police Force personnel. The system employs cutting-edge machine learning and natural language processing technologies to provide early detection of mental health issues and prevent potential incidents.
-
-#### Primary Objectives:
+### 🎯 Primary Objectives
 
 - **Early Detection**: Identify mental health deterioration before critical incidents occur
-- **On-Demand Monitoring**: Manual CCTV monitoring with emotion detection capabilities
-- **Risk Assessment**: Categorize personnel into risk levels (LOW, MEDIUM, HIGH, CRITICAL)
 - **Preventive Intervention**: Enable timely counseling and support interventions
 - **Data-Driven Insights**: Generate actionable intelligence for mental health management
+- **Resource Optimization**: Efficient allocation of counseling and medical resources
 - **Compliance & Privacy**: Ensure data security standards and privacy protection
 
-#### Key Benefits:
+## 🏗️ System Architecture
 
-- **Reduced Suicide Rates**: Early intervention capabilities to prevent self-harm incidents
-- **Improved Personnel Welfare**: Proactive mental health support system
-- **Resource Optimization**: Efficient allocation of counseling and medical resources
-- **Evidence-Based Decisions**: Data-driven approach to personnel management
-- **Operational Readiness**: Maintain force effectiveness through mental health monitoring
+### Technology Stack
+
+**Backend:**
+- **Framework**: Python Flask with Blueprint-based modular architecture
+- **Database**: MySQL with optimized schema for mental health data
+- **AI/ML**: TensorFlow, OpenCV, scikit-learn for face recognition and emotion detection
+- **APIs**: RESTful API design with comprehensive endpoint coverage
+
+**Frontend:**
+- **Framework**: React with TypeScript for type safety
+- **UI Library**: Modern component-based design with Tailwind CSS
+- **State Management**: Context API for global state management
+- **Build System**: Create React App with production optimization
+
+**AI/ML Components:**
+- **Face Recognition**: Enhanced face detection and recognition using deep learning
+- **Emotion Detection**: Real-time emotion analysis from facial expressions
+- **Natural Language Processing**: Sentiment analysis for survey responses
+- **Risk Assessment**: Dynamic scoring algorithms for mental health evaluation
+
+### High-Level Architecture
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │    Backend      │    │    Database     │
+│   (React TS)    │◄──►│   (Flask API)   │◄──►│    (MySQL)      │
+│                 │    │                 │    │                 │
+│ • Dashboard     │    │ • REST APIs     │    │ • User Data     │
+│ • Admin Panel   │    │ • AI Services   │    │ • Survey Data   │
+│ • Survey Forms  │    │ • ML Models     │    │ • CCTV Data     │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                                │
+                                ▼
+                       ┌─────────────────┐
+                       │   AI/ML Layer   │
+                       │                 │
+                       │ • Face Recog.   │
+                       │ • Emotion Det.  │
+                       │ • NLP Analysis  │
+                       │ • Risk Scoring  │
+                       └─────────────────┘
+```
+
+## 📁 Repository Structure
+
+```
+SATHI/
+├── backend/                    # Python Flask backend
+│   ├── api/                   # API modules
+│   │   ├── auth/             # Authentication endpoints
+│   │   ├── admin/            # Administrative functions
+│   │   ├── survey/           # Survey management
+│   │   ├── image/            # Image processing & ML
+│   │   └── monitor/          # System monitoring
+│   ├── config/               # Configuration management
+│   ├── db/                   # Database schema and utilities
+│   ├── services/             # Business logic services
+│   ├── utils/                # Utility functions
+│   └── app.py                # Main application entry point
+├── frontend/                  # React TypeScript frontend
+│   ├── src/
+│   │   ├── components/       # Reusable UI components
+│   │   ├── pages/           # Application pages
+│   │   ├── services/        # API service layer
+│   │   └── context/         # React context providers
+│   └── public/              # Static assets
+├── Documentation/            # Technical documentation
+├── screenshots/             # Application screenshots
+└── README.md               # This file
+```
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- **Python 3.8+** with pip
+- **Node.js 16+** with npm
+- **MySQL 8.0+**
+- **Git**
+
+### Installation Steps
+
+1. **Clone the Repository**
+```bash
+git clone https://github.com/JayeshCC/SATHI.git
+cd SATHI
+```
+
+2. **Setup Backend**
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env
+# Edit .env with your database configuration
+python db/init_db.py
+python app.py
+```
+
+3. **Setup Frontend**
+```bash
+cd frontend
+npm install
+npm start
+```
+
+4. **Access the Application**
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:5000
+
+### Default Admin Credentials
+- **Force ID**: 100000001
+- **Password**: admin123
+
+## 🔧 Core Components
+
+### 1. Authentication & Authorization
+- Role-based access control (Admin/Soldier)
+- Session management with dynamic timeouts
+- Secure password hashing with bcrypt
+
+### 2. Survey Management
+- Dynamic questionnaire creation and management
+- Multilingual support (English/Hindi)
+- Real-time sentiment analysis during survey completion
+
+### 3. AI/ML Services
+- **Face Recognition**: Enhanced facial detection and recognition
+- **Emotion Detection**: Real-time emotion analysis during surveys
+- **NLP Analysis**: Sentiment analysis of survey responses
+- **Risk Assessment**: Dynamic scoring based on combined metrics
+
+### 4. Administrative Dashboard
+- Real-time statistics and analytics
+- Soldier management and reporting
+- System configuration and settings
+- Export capabilities (PDF/CSV)
+
+### 5. Monitoring & Alerts
+- Real-time emotion monitoring during surveys
+- Automated risk level assessment
+- Critical alert notifications
+- System health monitoring
+
+## 📊 Key Features
+
+### Mental Health Assessment
+- **Dynamic Risk Scoring**: Combines NLP sentiment analysis (70%) and emotion detection (30%)
+- **Four-Tier Risk Levels**: LOW, MEDIUM, HIGH, CRITICAL with specific thresholds
+- **Real-time Analysis**: Immediate processing during survey completion
+- **Historical Tracking**: Longitudinal mental health trend analysis
+
+### Advanced Analytics
+- **Dashboard Statistics**: Real-time metrics and KPIs
+- **Risk Distribution**: Visual representation of soldier risk levels
+- **Trend Analysis**: Weekly and monthly mental health trends
+- **Export Capabilities**: PDF and CSV reports for detailed analysis
+
+### System Configuration
+- **Dynamic Settings**: Database-driven configuration management
+- **Threshold Customization**: Adjustable risk assessment parameters
+- **Multilingual Support**: English and Hindi language support
+- **Mobile Optimization**: Responsive design for all devices
+
+## 🔒 Security Features
+
+- **Role-Based Access Control**: Separate admin and soldier access levels
+- **Session Management**: Secure session handling with configurable timeouts
+- **Data Encryption**: Secure storage of sensitive mental health data
+- **Input Validation**: Comprehensive data sanitization and validation
+- **Audit Logging**: Complete audit trail for all system activities
+
+## 🔧 Configuration
+
+The system uses a dynamic configuration management approach:
+
+### Environment Variables (.env)
+```bash
+DB_NAME=crpf_mental_health
+DB_USER=your_username
+DB_PASSWORD=your_password
+DB_HOST=localhost
+DB_PORT=3306
+SECRET_KEY=your-secret-key
+DEBUG_MODE=true
+```
+
+### Dynamic Settings (Database)
+- Risk assessment thresholds
+- NLP and emotion detection weights
+- Session timeout configurations
+- Webcam and monitoring settings
+
+## 📚 Documentation
+
+Comprehensive documentation is available in the `Documentation/` folder:
+
+- **[API Documentation](docs/API_Documentation.md)**: Complete API reference
+- **[Developer Guide](docs/Developer_Guide.md)**: Development setup and guidelines
+- **[Architectural Overview](docs/Architectural_Overview.md)**: System architecture details
+- **[User Manual](docs/User_Manual.md)**: End-user guide with screenshots
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is proprietary software developed for the Central Reserve Police Force (CRPF). All rights reserved.
+
+## 🆘 Support
+
+For technical support and documentation:
+- **Issues**: Submit issues through GitHub
+- **Documentation**: Check the `Documentation/` folder
+- **Contact**: [Your Contact Information]
 
 ---
+
+**Note**: This system handles sensitive mental health data. Please ensure all deployment and usage complies with applicable privacy and security regulations.
 
 ## System Architecture
 
