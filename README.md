@@ -361,24 +361,26 @@ This project is proprietary software developed for the Central Reserve Police Fo
 
 ### ✅ **Fully Implemented Features**
 
-- **Survey Management**: Complete questionnaire creation and response system
-- **Sentiment Analysis**: VADER-based depression scoring from text responses
+- **Survey Management**: Complete questionnaire creation and response system with speech-to-text input convenience
+- **Text Sentiment Analysis**: VADER-based depression scoring from text responses
 - **Face Recognition**: dlib-based soldier identification system
-- **Emotion Detection**: CNN-based emotion classification from CCTV feeds
+- **Facial Emotion Detection**: CNN-based emotion classification from CCTV feeds
 - **Admin Dashboard**: Real-time statistics and soldier monitoring
 - **Database Schema**: Complete MySQL database with all required tables
-- **Translation Services**: English-Hindi translation for surveys
+- **Translation Services**: English-Hindi translation for surveys (requires internet)
 - **CCTV Monitoring**: Manual start/stop monitoring with emotion detection
-- **Notification System**: Database-based alerts and notifications
+- **Notification System**: Database-based alerts and email notifications (email configuration required)
 
 ### 🔄 **Partially Implemented Features**
 
 - **Authentication**: Basic admin-only authentication (JWT tokens planned)
 - **Scheduling**: CCTV auto-scheduling service (currently disabled)
-- **Email Notifications**: Configuration ready (SMTP setup required)
+- **Email Notifications**: Configuration ready (SMTP setup required for production)
 
 ### 📋 **Planned Features**
 
+- **SMS Notifications**: Text message alerts (currently only email notifications supported)
+- **Voice Analysis**: Depression detection from speech patterns (currently only speech-to-text input available)
 - **Redis Caching**: Performance optimization through caching
 - **Celery Background Tasks**: Asynchronous processing for scalability
 - **Multi-Factor Authentication**: Enhanced security features
@@ -456,8 +458,9 @@ Risk Detection → Alert Generation → Notification Routing → Delivery Confir
 ```
 
 - **Function**: Automated alert system for high-risk cases
-- **Data Flow**: Score monitoring → Threshold breach → Alert creation → Multi-channel notification
-- **Channels**: Database notifications, configurable email alerts
+- **Data Flow**: Score monitoring → Threshold breach → Alert creation → Notification delivery
+- **Channels**: Database notifications, email alerts (SMTP configuration required)
+- **Future**: SMS notifications planned for future implementation
 
 ---
 

@@ -47,7 +47,9 @@ class Settings:
     
     # Notification Configuration
     EMAIL_ENABLED = os.getenv('EMAIL_ENABLED', 'False').lower() == 'true'
-    SMS_ENABLED = os.getenv('SMS_ENABLED', 'False').lower() == 'true'
+    # SMS_ENABLED is for future implementation - SMS functionality is not currently implemented
+    # Only email notifications are currently supported
+    SMS_ENABLED = os.getenv('SMS_ENABLED', 'False').lower() == 'true'  # Future feature
     ALERT_COOLDOWN = int(os.getenv('ALERT_COOLDOWN', 3600))  # 1 hour in seconds
     
     # Pagination and Performance
