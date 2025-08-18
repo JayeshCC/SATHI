@@ -182,7 +182,6 @@ MAX_PAGE_SIZE=100
 
 # Notification Configuration
 EMAIL_ENABLED=true
-SMS_ENABLED=false
 
 # Logging Configuration
 LOG_LEVEL=INFO
