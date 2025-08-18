@@ -87,7 +87,8 @@ def create_questionnaire():
 
     except Exception as e:
         db.rollback()
-        return jsonify({'error': str(e)}), 500
+        logger.error("Error creating questionnaire", exc_info=True)
+        return jsonify({'error': 'An internal error has occurred.'}), 500
     finally:
         cursor.close()
         db.close()
