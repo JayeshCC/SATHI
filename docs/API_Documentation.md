@@ -1,4 +1,10 @@
-# SATHI - API Documentation
+# API Documentation
+*Part of SATHI Documentation Suite*
+
+**📚 Quick Navigation:**
+[🏠 README](../README.md) | [🤝 Contributing](../CONTRIBUTING.md) | [🔌 API](API_Documentation.md) | [👥 Users](USER_GUIDE.md) | [🚀 Deploy](../DEPLOYMENT_GUIDE.md) | [🔧 Troubleshoot](../TROUBLESHOOTING.md)
+
+---
 
 ## Table of Contents
 
@@ -784,6 +790,364 @@ curl -X GET "http://localhost:5000/api/admin/soldiers-report?risk_level=high&day
   -H "Cookie: session=your_session_cookie"
 ```
 
+```
+
+### Python SDK Example
+
+```python
+import requests
+import json
+
+class SATHIClient:
+    """Python SDK for SATHI API integration."""
+    
+    def __init__(self, base_url: str = "http://localhost:5000/api"):
+        self.base_url = base_url
+        self.session = requests.Session()
+    
+    def login(self, force_id: str, password: str) -> bool:
+        """Authenticate with SATHI system."""
+        response = self.session.post(f"{self.base_url}/auth/login", json={
+            "force_id": force_id,
+            "password": password
+        })
+        return response.status_code == 200
+    
+    def get_dashboard_stats(self, timeframe: str = "7d") -> dict:
+        """Get dashboard statistics."""
+        response = self.session.get(
+            f"{self.base_url}/admin/dashboard-stats",
+            params={"timeframe": timeframe}
+        )
+        return response.json()
+    
+    def submit_survey(self, force_id: str, responses: list, image_data: str = None) -> dict:
+        """Submit survey response with optional image."""
+        payload = {
+            "force_id": force_id,
+            "responses": responses
+        }
+        if image_data:
+            payload["image_data"] = image_data
+            
+        response = self.session.post(f"{self.base_url}/survey/submit", json=payload)
+        return response.json()
+
+# Usage example
+client = SATHIClient()
+if client.login("100000001", "admin123"):
+    stats = client.get_dashboard_stats("30d")
+    print(f"Total soldiers: {stats['total_soldiers']}")
+```
+
+### JavaScript SDK Example
+
+```javascript
+class SATHIClient {
+    constructor(baseUrl = 'http://localhost:5000/api') {
+        this.baseUrl = baseUrl;
+        this.headers = {
+            'Content-Type': 'application/json'
+        };
+    }
+
+    async login(forceId, password) {
+        const response = await fetch(`${this.baseUrl}/auth/login`, {
+            method: 'POST',
+            headers: this.headers,
+            credentials: 'include',
+            body: JSON.stringify({
+                force_id: forceId,
+                password: password
+            })
+        });
+        return response.ok;
+    }
+
+    async getDashboardStats(timeframe = '7d') {
+        const response = await fetch(
+            `${this.baseUrl}/admin/dashboard-stats?timeframe=${timeframe}`,
+            {
+                method: 'GET',
+                credentials: 'include'
+            }
+        );
+        return await response.json();
+    }
+
+    async submitSurvey(forceId, responses, imageData = null) {
+        const payload = {
+            force_id: forceId,
+            responses: responses
+        };
+        if (imageData) {
+            payload.image_data = imageData;
+        }
+
+        const response = await fetch(`${this.baseUrl}/survey/submit`, {
+            method: 'POST',
+            headers: this.headers,
+            credentials: 'include',
+            body: JSON.stringify(payload)
+        });
+        return await response.json();
+    }
+}
+
+// Usage example
+const client = new SATHIClient();
+const isLoggedIn = await client.login('100000001', 'admin123');
+if (isLoggedIn) {
+    const stats = await client.getDashboardStats('30d');
+    console.log(`Total soldiers: ${stats.total_soldiers}`);
+}
+```
+
+### Error Handling Examples
+
+```python
+# Python error handling
+try:
+    response = requests.post('/api/auth/login', json=login_data)
+    response.raise_for_status()  # Raises exception for 4xx/5xx status codes
+    
+    data = response.json()
+    if not data.get('success'):
+        print(f"Login failed: {data.get('message')}")
+    
+except requests.exceptions.RequestException as e:
+    print(f"Network error: {e}")
+except ValueError as e:
+    print(f"Invalid JSON response: {e}")
+```
+
+```javascript
+// JavaScript error handling
+try {
+    const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(loginData)
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (!data.success) {
+        throw new Error(data.message || 'Login failed');
+    }
+
+} catch (error) {
+    console.error('Login error:', error.message);
+    // Handle error appropriately in your application
+}
+```
+
+## API Rate Limiting and Best Practices
+
+### Rate Limits
+
+| Endpoint Category | Rate Limit | Window |
+|------------------|------------|---------|
+| Authentication | 5 requests | 1 minute |
+| Dashboard | 60 requests | 1 minute |
+| Survey Submission | 10 requests | 1 minute |
+| Image Processing | 20 requests | 1 minute |
+| General API | 100 requests | 1 minute |
+
+### Best Practices
+
+1. **Authentication Management**
+   ```python
+   # Reuse sessions to avoid repeated authentication
+   session = requests.Session()
+   session.post('/api/auth/login', json=credentials)
+   # Use same session for subsequent requests
+   ```
+
+2. **Error Retry Logic**
+   ```python
+   import time
+   from functools import wraps
+
+   def retry_on_failure(max_retries=3, delay=1):
+       def decorator(func):
+           @wraps(func)
+           def wrapper(*args, **kwargs):
+               for attempt in range(max_retries):
+                   try:
+                       return func(*args, **kwargs)
+                   except requests.exceptions.RequestException as e:
+                       if attempt == max_retries - 1:
+                           raise
+                       time.sleep(delay * (2 ** attempt))  # Exponential backoff
+               return wrapper
+       return decorator
+
+   @retry_on_failure(max_retries=3)
+   def call_api(endpoint, data):
+       return requests.post(endpoint, json=data)
+   ```
+
+3. **Pagination Handling**
+   ```python
+   def get_all_soldiers():
+       all_soldiers = []
+       page = 1
+       while True:
+           response = requests.get(f'/api/admin/soldiers?page={page}&limit=50')
+           data = response.json()
+           
+           if not data['soldiers']:
+               break
+               
+           all_soldiers.extend(data['soldiers'])
+           
+           if len(data['soldiers']) < 50:  # Last page
+               break
+               
+           page += 1
+       
+       return all_soldiers
+   ```
+
+## WebSocket API (Real-time Features)
+
+### Connection
+
+```javascript
+const socket = new WebSocket('ws://localhost:5000/ws');
+
+socket.onopen = function(event) {
+    console.log('Connected to SATHI WebSocket');
+    
+    // Authenticate WebSocket connection
+    socket.send(JSON.stringify({
+        type: 'auth',
+        token: 'your_session_token'
+    }));
+};
+
+socket.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    
+    switch(data.type) {
+        case 'risk_alert':
+            handleRiskAlert(data.payload);
+            break;
+        case 'analysis_complete':
+            handleAnalysisComplete(data.payload);
+            break;
+        case 'system_status':
+            updateSystemStatus(data.payload);
+            break;
+    }
+};
+```
+
+### Real-time Risk Alerts
+
+```javascript
+function handleRiskAlert(alert) {
+    // alert = {
+    //   soldier_id: "123456789",
+    //   risk_level: "HIGH",
+    //   score: 0.85,
+    //   timestamp: "2024-01-15T10:30:00Z",
+    //   message: "Elevated depression indicators detected"
+    // }
+    
+    if (alert.risk_level === 'CRITICAL') {
+        showUrgentNotification(alert);
+    } else {
+        updateDashboard(alert);
+    }
+}
+```
+
+## SDK Integration Examples
+
+### React Integration
+
+```typescript
+import React, { useState, useEffect } from 'react';
+import { SATHIClient } from './services/sathi-client';
+
+interface DashboardStats {
+    total_soldiers: number;
+    high_risk_soldiers: number;
+    critical_alerts: number;
+}
+
+export const AdminDashboard: React.FC = () => {
+    const [stats, setStats] = useState<DashboardStats | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const client = new SATHIClient();
+                const isAuthenticated = await client.login(
+                    localStorage.getItem('force_id'),
+                    localStorage.getItem('password')
+                );
+
+                if (isAuthenticated) {
+                    const dashboardStats = await client.getDashboardStats('7d');
+                    setStats(dashboardStats);
+                } else {
+                    setError('Authentication failed');
+                }
+            } catch (err) {
+                setError('Failed to fetch dashboard stats');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchStats();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+
+    return (
+        <div className="dashboard">
+            <h1>SATHI Dashboard</h1>
+            <div className="stats-grid">
+                <div className="stat-card">
+                    <h3>Total Soldiers</h3>
+                    <p>{stats?.total_soldiers}</p>
+                </div>
+                <div className="stat-card">
+                    <h3>High Risk</h3>
+                    <p>{stats?.high_risk_soldiers}</p>
+                </div>
+                <div className="stat-card">
+                    <h3>Critical Alerts</h3>
+                    <p>{stats?.critical_alerts}</p>
+                </div>
+            </div>
+        </div>
+    );
+};
+```
+
 ---
 
-This API documentation provides comprehensive coverage of all available endpoints in the SATHI system. For additional details or support, please refer to the system documentation or contact the development team.
+## 🔗 Related Documentation
+
+💡 **For Users**: See [User Guide - API Integration](USER_GUIDE.md#api-integration) for end-user API scenarios
+
+🤝 **For Developers**: See [Contributing Guide - API Development](../CONTRIBUTING.md#api-development) for development guidelines
+
+🚀 **For Deployment**: See [Deployment Guide - API Configuration](../DEPLOYMENT_GUIDE.md#api-configuration) for production setup
+
+🔧 **For Issues**: See [Troubleshooting - API Errors](../TROUBLESHOOTING.md#api-errors) for common API problems and solutions
+
+---
+
+This comprehensive API documentation provides all the tools and examples needed to integrate with the SATHI mental health monitoring system. For additional support or questions, please refer to the [Contributing Guide](../CONTRIBUTING.md) or create an issue in the repository.

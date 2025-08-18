@@ -1,4 +1,10 @@
-# SATHI - User Manual
+# User Guide
+*Part of SATHI Documentation Suite*
+
+**📚 Quick Navigation:**
+[🏠 README](../README.md) | [🤝 Contributing](../CONTRIBUTING.md) | [🔌 API](API_Documentation.md) | [👥 Users](USER_GUIDE.md) | [🚀 Deploy](../DEPLOYMENT_GUIDE.md) | [🔧 Troubleshoot](../TROUBLESHOOTING.md)
+
+---
 
 ## Table of Contents
 
@@ -1435,3 +1441,194 @@ SATHI is a powerful tool designed to support the mental health and wellbeing of 
 - Use the system as intended to support the wellbeing of all CRPF personnel
 
 For additional support or questions not covered in this manual, contact your system administrator or designated support personnel.
+
+## API Integration for Advanced Users
+
+For healthcare professionals and system integrators who need programmatic access to SATHI data, the system provides comprehensive API capabilities.
+
+### API Access Scenarios
+
+**Healthcare Providers:**
+- Integrate SATHI data with Electronic Health Records (EHR)
+- Build custom dashboards for mental health trends
+- Automate report generation for clinical workflows
+- Develop mobile applications for field assessments
+
+**Research Teams:**
+- Extract anonymized data for mental health research
+- Conduct statistical analysis on population trends
+- Develop new assessment algorithms
+- Validate existing mental health screening tools
+
+**System Administrators:**
+- Automate user management and provisioning
+- Build custom monitoring and alerting systems
+- Integrate with existing CRPF IT infrastructure
+- Develop backup and data migration tools
+
+💡 **Related**: For complete API documentation, see [API Documentation](API_Documentation.md)
+
+### Quick API Examples
+
+**Authentication:**
+```bash
+curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"force_id": "100000001", "password": "admin123"}'
+```
+
+**Get Dashboard Data:**
+```bash
+curl -X GET "http://localhost:5000/api/admin/dashboard-stats?timeframe=30d" \
+  -H "Cookie: session=your_session_cookie"
+```
+
+**Submit Survey Response:**
+```bash
+curl -X POST http://localhost:5000/api/survey/submit \
+  -H "Content-Type: application/json" \
+  -H "Cookie: session=your_session_cookie" \
+  -d '{
+    "force_id": "123456789",
+    "responses": ["I feel good today", "Work is manageable"],
+    "image_data": "base64_encoded_image_data"
+  }'
+```
+
+💡 **For Developers**: See [Contributing Guide - API Development](../CONTRIBUTING.md#api-development) for development guidelines
+
+## Data Privacy and Compliance
+
+### Healthcare Data Protection
+
+SATHI implements comprehensive data protection measures to ensure compliance with healthcare privacy standards:
+
+**Data Encryption:**
+- All mental health data encrypted at rest using AES-256
+- TLS 1.3 encryption for all data in transit
+- Database-level encryption for sensitive fields
+- Encrypted backups with key rotation
+
+**Access Controls:**
+- Role-based access control (RBAC) with principle of least privilege
+- Multi-factor authentication for administrative accounts
+- Session management with automatic timeout
+- Audit logging for all data access
+
+**Privacy by Design:**
+- Data minimization - collect only necessary information
+- Purpose limitation - use data only for stated purposes
+- Storage limitation - retain data only as long as necessary
+- Anonymization capabilities for research and analytics
+
+### Compliance Standards
+
+SATHI meets or exceeds requirements for:
+- Healthcare privacy regulations
+- Government data protection standards
+- Military information security protocols
+- International healthcare data standards
+
+🔧 **Troubleshooting**: For privacy-related issues, see [Troubleshooting - Privacy and Security](../TROUBLESHOOTING.md#privacy-and-security)
+
+## Mobile and Remote Access
+
+### Mobile Optimization
+
+SATHI is fully optimized for mobile devices to support field operations:
+
+**Responsive Design:**
+- Adapts to all screen sizes and orientations
+- Touch-friendly interface elements
+- Optimized for one-handed operation
+- Fast loading on mobile networks
+
+**Offline Capabilities:**
+- Cache survey questions for offline completion
+- Store responses locally when connectivity is poor
+- Automatic sync when connection is restored
+- Progressive web app (PWA) installation
+
+**Mobile Security:**
+- Biometric authentication on supported devices
+- Automatic screen lock after inactivity
+- Secure local storage with encryption
+- Remote wipe capabilities for lost devices
+
+### Field Deployment Scenarios
+
+**Remote Outposts:**
+- Download survey packages for offline use
+- Batch upload when connectivity permits
+- Store critical data locally with encryption
+- Satellite internet optimization
+
+**Emergency Situations:**
+- Quick assessment tools for crisis response
+- Streamlined reporting for urgent cases
+- Emergency contact integration
+- Offline documentation capabilities
+
+**Mobile Clinics:**
+- Portable assessment stations
+- Tablet-optimized interface
+- Bluetooth integration for medical devices
+- Print capabilities for reports
+
+🚀 **Deployment**: For mobile deployment guidance, see [Deployment Guide - Mobile Configuration](../DEPLOYMENT_GUIDE.md#mobile-configuration)
+
+## Integration with CRPF Systems
+
+### Identity Management Integration
+
+SATHI integrates seamlessly with existing CRPF identity systems:
+
+**Single Sign-On (SSO):**
+- LDAP/Active Directory integration
+- SAML 2.0 authentication support
+- OAuth 2.0 for third-party applications
+- Automatic user provisioning and deprovisioning
+
+**Role Mapping:**
+- Automatic role assignment based on CRPF hierarchy
+- Dynamic permission updates
+- Unit-based access control
+- Command structure recognition
+
+### Data Exchange
+
+**ERP Integration:**
+- Personnel management system connectivity
+- Automatic roster updates
+- Leave and duty status synchronization
+- Organizational chart integration
+
+**Medical Records:**
+- HL7 FHIR standard compliance
+- Electronic Health Record (EHR) integration
+- Medical history correlation
+- Clinical decision support integration
+
+**Reporting Systems:**
+- Automated report generation for command structure
+- Dashboard integration with existing systems
+- Data export to standard formats
+- Real-time alerting through existing channels
+
+💡 **Related**: For system integration details, see [API Documentation - Enterprise Integration](API_Documentation.md#enterprise-integration)
+
+---
+
+## 🔗 Related Documentation
+
+💻 **For Developers**: See [Contributing Guide](../CONTRIBUTING.md) for development setup and guidelines
+
+🔌 **For API Users**: See [API Documentation](API_Documentation.md) for complete endpoint reference
+
+🚀 **For Deployment**: See [Deployment Guide](../DEPLOYMENT_GUIDE.md) for installation and configuration
+
+🔧 **For Issues**: See [Troubleshooting Guide](../TROUBLESHOOTING.md) for problem resolution
+
+---
+
+This comprehensive user guide provides all the information needed to effectively use SATHI for mental health monitoring in CRPF operations. The system's powerful features, combined with proper training and usage, create a robust foundation for supporting the mental health and wellbeing of all personnel.
