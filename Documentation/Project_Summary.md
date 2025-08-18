@@ -322,7 +322,6 @@ CREATE TABLE audit_logs (
 ### 2. Third-party Integrations
 
 - **Email Notifications**: SMTP integration for email alerts
-- **SMS Notifications**: SMS gateway integration capability
 - **Single Sign-On**: LDAP/Active Directory integration ready
 - **Analytics**: Google Analytics and custom analytics support
 

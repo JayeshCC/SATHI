@@ -306,20 +306,4 @@ DEBUG_MODE=true
 REACT_APP_DEBUG_MODE=true
 ```
 
-## Support and Maintenance
-
-### Regular Maintenance Tasks
-
-1. Database backup and optimization
-2. Log file rotation and cleanup
-3. Security patch updates
-4. Performance monitoring and tuning
-
-### Monitoring Recommendations
-
-1. Set up database performance monitoring
-2. Configure application error tracking
-3. Implement uptime monitoring
-4. Monitor user activity and system usage
-
 This enhanced system provides a solid foundation for scalable, maintainable, and user-friendly mental health monitoring for CRPF personnel.
