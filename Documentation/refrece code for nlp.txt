@@ -1,3 +1,14 @@
+# REFERENCE CODE FOR NLP - NOT IMPLEMENTED
+# 
+# This file contains reference code for voice/audio analysis using Whisper.
+# These features are NOT currently implemented in the SATHI system.
+# The system currently only supports:
+# - Text sentiment analysis (implemented)
+# - Facial emotion detection (implemented) 
+# - Speech-to-text input for surveys (browser-based, for convenience only)
+#
+# Voice analysis for depression detection is a planned future feature.
+
 from flask import Flask, request, jsonify
 import base64
 import os

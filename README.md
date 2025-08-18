@@ -380,7 +380,7 @@ This project is proprietary software developed for the Central Reserve Police Fo
 ### 📋 **Planned Features**
 
 - **SMS Notifications**: Text message alerts (currently only email notifications supported)
-- **Voice Analysis**: Depression detection from speech patterns (currently only speech-to-text input available)
+- **Voice Analysis for Mental Health**: Depression detection from speech patterns (planned feature - currently only speech-to-text convenience input available)
 - **Redis Caching**: Performance optimization through caching
 - **Celery Background Tasks**: Asynchronous processing for scalability
 - **Multi-Factor Authentication**: Enhanced security features
