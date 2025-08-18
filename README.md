@@ -91,7 +91,7 @@ SATHI/
 │   │   ├── services/        # API service layer
 │   │   └── context/         # React context providers
 │   └── public/              # Static assets
-├── Documentation/            # Technical documentation
+├── docs/                     # Empty folder (docs moved to root)
 ├── screenshots/             # Application screenshots
 └── README.md               # This file
 ```
@@ -276,12 +276,13 @@ DEBUG_MODE=true
 
 ## 📚 Documentation
 
-Comprehensive documentation is available in the `Documentation/` folder:
+Comprehensive documentation is available as follows:
 
-- **[API Documentation](docs/API_Documentation.md)**: Complete API reference
-- **[Developer Guide](docs/Developer_Guide.md)**: Development setup and guidelines
-- **[Architectural Overview](docs/Architectural_Overview.md)**: System architecture details
-- **[User Manual](docs/User_Manual.md)**: End-user guide with screenshots
+- **[API Documentation](API_DOCUMENTATION.md)**: Complete API reference with examples
+- **[Contributing Guide](CONTRIBUTING.md)**: Development setup and contribution guidelines  
+- **[User Guide](USER_GUIDE.md)**: End-user guide with comprehensive instructions
+- **[Deployment Guide](DEPLOYMENT_GUIDE.md)**: Production deployment and configuration
+- **[Troubleshooting Guide](TROUBLESHOOTING.md)**: Common issues and solutions
 
 ## 🤝 Contributing
 
